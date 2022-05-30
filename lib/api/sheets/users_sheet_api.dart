@@ -67,5 +67,13 @@ class UserSheetsApi{
 
   }
 
+  static Future<User> getById(int id) async{
+    if(_userSheet == null) return null;
+
+    final json = await _userSheet.values.map.rowByKey(id, fromColumn: 1);
+    return json == null ? null: User.fromJson(json);
+    
+  }
+
 
 }

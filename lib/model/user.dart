@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class UserFields{
   static final String id = 'id';
   static final String date = 'date';
@@ -30,6 +32,16 @@ class User {
     this.ivaValue,
     this.totalValue
   });
+
+  static User fromJson(Map<String, dynamic> json) =>  User(
+    id: jsonDecode(json[UserFields.id]),
+    date: json[UserFields.date],
+    month: json[UserFields.month],
+    invoiceNumber: json[UserFields.invoiceNumber],
+    subTotalValue: json[UserFields.subTotalValue],
+    ivaValue: json[UserFields.ivaValue],
+    totalValue: json[UserFields.totalValue]
+  );
 
   Map<String, dynamic>  toJson() => {
     UserFields.id: id,

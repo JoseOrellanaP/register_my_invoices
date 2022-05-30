@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:register_my_invoices/api/sheets/users_sheet_api.dart';
 import 'package:register_my_invoices/model/user.dart';
+import 'package:flutter_restart/flutter_restart.dart';
+
 
 class add_new_data extends StatefulWidget {
 
@@ -163,14 +165,6 @@ class _add_new_dataState extends State<add_new_data> {
                   double ivaValueD = double.parse(totalValue) - double.parse(subTotal);
                   String ivaValue = ivaValueD.toStringAsFixed(2);
           
-          /*
-                  print("The subtotal is $subTotal");
-                  print("The iva values is $ivaValue");
-                  print("The date is $date");
-                  print("The month is $month");
-                  print("The invoice number is $invoiceNumber");
-                  print("The total value is $totalValue");
-                  */
 
 
                   final id = await UserSheetsApi.getRowCount();
@@ -202,6 +196,14 @@ class _add_new_dataState extends State<add_new_data> {
 
                     controllerNumber.text = "";
                     controllerTotal.text = "";
+
+                    setState(() async{
+                      await FlutterRestart.restartApp();  
+                    });
+
+
+                    
+                    
 
               
                 },

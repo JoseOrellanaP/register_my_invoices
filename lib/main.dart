@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:register_my_invoices/api/sheets/users_sheet_api.dart';
-import 'package:register_my_invoices/scream/list_data.dart';
+import 'package:register_my_invoices/screen/list_data.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
