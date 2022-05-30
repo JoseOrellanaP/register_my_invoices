@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:register_my_invoices/api/sheets/users_sheet_api.dart';
+import 'package:register_my_invoices/model/user.dart';
 
 class add_new_data extends StatefulWidget {
 
@@ -136,7 +138,7 @@ class _add_new_dataState extends State<add_new_data> {
               
               ElevatedButton(
                 child: Text('Save'),
-                onPressed: (){
+                onPressed: () async{
           
                   if(controllerNumber.text == '' || controllerTotal.text == ''){
                     
@@ -161,14 +163,46 @@ class _add_new_dataState extends State<add_new_data> {
                   double ivaValueD = double.parse(totalValue) - double.parse(subTotal);
                   String ivaValue = ivaValueD.toStringAsFixed(2);
           
-                  print(subTotal);
-                  print(ivaValue);
-                  print(date);
-                  print("$month");
-                  print(invoiceNumber);
+          /*
+                  print("The subtotal is $subTotal");
+                  print("The iva values is $ivaValue");
+                  print("The date is $date");
+                  print("The month is $month");
+                  print("The invoice number is $invoiceNumber");
+                  print("The total value is $totalValue");
+                  */
+
+
+                  final id = await UserSheetsApi.getRowCount();
+
+                  print(id);
+
+                  final user = User(
+                    id: id + 1,
+                    date: date,
+                    month: month,
+                    invoiceNumber: invoiceNumber,
+                    subTotalValue: subTotal,
+                    ivaValue: ivaValue,
+                    totalValue: totalValue,
+                  );
+
+
                   
-          
-                  print(totalValue);
+
+                  await UserSheetsApi.insert([user.toJson()]);
+
+                  Fluttertoast.showToast(
+                      msg: 'Se guardo los datos',
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.green
+                    );
+
+                    controllerNumber.text = "";
+                    controllerTotal.text = "";
+
               
                 },
               )

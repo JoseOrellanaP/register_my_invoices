@@ -32,6 +32,7 @@ dependencies:
 
   intl: ^0.17.0
   fluttertoast: ^7.1.8
+  gsheets: ^0.2.7
 
 
   # The following adds the Cupertino Icons font to your application.
